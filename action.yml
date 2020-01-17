@@ -1,8 +1,8 @@
-name: Jira Check
-description: Check that pull request titles contain a Jira issue.
+name: Check Pull Request Title
+description: Check that pull request titles matches a desired regular expression.
 inputs:
   pattern:
-    description: 'A regex pattern to check if a pull request title is valid.'
+    description: 'A ECMAScript supported regular expression pattern to check if a pull request title is valid.'
     required: true
 runs:
   using: node12
