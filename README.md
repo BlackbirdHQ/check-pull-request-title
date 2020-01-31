@@ -8,6 +8,8 @@ Could be used for:
 - Enforcing including a Jira ticket reference in the title.
 - Enforcing using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+The check will add a status check on the PR. If you want to enforce the title, this status check (called `Rule: Pull Request Title/verify-title`) should be used, and not the action itself.
+
 # Example Workflow
 
 ```yml
