@@ -21,26 +21,34 @@ async function run() {
   core.info(title);
 
   if (!regex.test(title)) {
-    await octokit.repos.createStatus({
-      owner,
-      repo,
-      sha,
-      context: 'Rule: Pull Request Title/verify-title',
-      state: 'failure',
-      description: "The title should look something like 'fix(ui-app): Handle undefined values when listing lines'"
-    });
+    try {
+      await octokit.repos.createStatus({
+        owner,
+        repo,
+        sha,
+        context: 'Rule: Pull Request Title/verify-title',
+        state: 'failure',
+        description: "The title should look something like 'fix(ui-app): Handle undefined values when listing lines'"
+      });
+    } catch(err) {
+      console.error("Failed to set status check on PR");
+    }
     core.setFailed(
       `Pull request title "${title}" does not match regex pattern "${pattern}".`,
     );
   } else {
-    await octokit.repos.createStatus({
-      owner,
-      repo,
-      sha,
-      context: 'Rule: Pull Request Title/verify-title',
-      state: 'success',
-      description: 'Title looks fine'
-    });
+    try {
+      await octokit.repos.createStatus({
+        owner,
+        repo,
+        sha,
+        context: 'Rule: Pull Request Title/verify-title',
+        state: 'success',
+        description: 'Title looks fine'
+      });
+    } catch(err) {
+      console.error("Failed to set status check on PR");
+    }
   }
 }
 
